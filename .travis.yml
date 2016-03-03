@@ -1,0 +1,38 @@
+language: node_js
+node_js:
+- stable
+before_install:
+- npm install -g grunt-cli bower karma phantomjs-prebuilt karma-phantomjs-launcher
+  protractor
+- bower install
+cache:
+  apt: true
+  directories:
+  - node_modules
+  - vendor
+before_script:
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- sleep 3
+- wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key
+  add -
+- sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+- sudo apt-get update
+- sudo apt-get install google-chrome-stable
+script:
+- grunt release package
+deploy:
+- provider: s3
+  bucket: www.openvitae.org
+  skip_cleanup: true
+  local_dir: release
+  region: ap-northeast-1
+  detect_encoding: true
+  acl: public_read
+  secret_access_key:
+    secure: nf4+IG01ipnsQGHwmF/sIZmBIQnYM6JLhaHcRkAUBkjmFrlj/1WRPPRI7EAZXO+NudbMeG99H6EI/9GYAfr4ezVxVVFC52/1tZW/EeRRGjRTlwskCKA1X9UzlDPzaI0vT6pTjnoZXvWKiwJzG+ed8swimpQugAY0GJ8shiDlT05lhGGKY/g7noTpREahTVGQNLnii8MBk+n2+KHp1GVdYBMdM/ePOONy2aBV2i5u+6X6VCBJ7UmxeIBPXujvmAn6mPPzY4vShpQQIj82mtt3TuYVh6Im+1D0MZjZ+V83s+e9voSSPXUxP1YMW4ZT4eAuIFlOG2kYkrY7Yz4AqmHTZkImIMzGfaORfNHkGCDC4DPcVNCa72YQOpFhpqGXLxh/sSPgDioXnlVAKghcdlaxMtRKL5ubN/mMT1Ggz7FJHifkEb3wtyeWYwOE3cM98BYNtKVOi0qSjWVXn2Y5JlkwOxUj/ALZBE2VDFdfPgdqFVj8/Q1nn+QHay/mv9QDzanh6Do3jSXvI5J4xK4Mfy4SOkaEPmjRADfyvcUj4Li0IUBJ6yo/7T22hW1YYF8jSKHUUfuC5tyaFK2hkKfeUfmXDhY0pCoT6wFNAsqeh7tzmvYq8maQtR4qOx10l2ywSVnZGSthuWgnaHAqlRO+xv9oYWOdd79477GNjbH/ZuW7byk=
+  access_key_id:
+     secure: byYSmwSAHYhIhL9++J7lEB7V6RVPykMqAFQsMiuhrE8WhgQf3sfG+GohdLtErQQBIzl70nGRY0lz/K7y8vi9/OMSXp3APVuBb9omUneX+xf0lz7qajs68Lfmc0H8sCok/IoW/Zs2ZEqKFBHYeeYt1jFJF3TnUyy0eiqRWQy/pPEkNfSwu+9v3bSm9wxxNhlG147zTw4nYyEjrzWIXhPodNAaH/GH68792atiECMkipIOpk2yebYuGwTy5hWy4PWXhKm14+aEagIuLo24kbs3t2mc5oPYBhizc2b5gwGTG2pd8djq82M2e/6jFKX253GYI+QCcU++R3CWYMI8Zq5x4K0RBsXGuX49UCn5xrRhFA9yBHQTqLpn5foTWr/xP88lO8FpQPAuRxF9glt4lgGp06AKJ3Zc308aBoSmheTt5yMBirk8D8Coy2PX46fwI37NULGrUjU57TuGoJ1ZjaZESI+v384k3BL3hKy510a9vLAusL6nBJb4E4XaoKUXSSvgD/K2D+n/qUZRWBI8b84OBjtOHOm9UQXN68D7AdAqNQ7LzGygsSrtJ5kJL1OMFqluoN2P/DhPz1o0Kk5VFSj1v82NDvauVkcIDfak59dluNmZsy4ewhEfJNaVD1xc8A+at8I5ZNqbV9OyQJaz0WmT2N1PSwNNq2OsXV4p8VtqkNc=
+  on:
+    branch: master
+    tags: true

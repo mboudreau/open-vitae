@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<base href="/">
+	<title><%= name.charAt(0).toUpperCase() + name.slice(1) %></title>
+
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="theme-color" content="#00476A">
+
+	<!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+	<link rel="stylesheet" type="text/css" href="<%= file %>?t=<%= timestamp %>"/>
+	<% }); %>
+
+	<script type="text/javascript">
+		// Horrible Apple iOS 9 Safari bug workaround -- Screw you Apple! https://forums.developer.apple.com/thread/13510
+		if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+			document.querySelector('meta[name=viewport]').setAttribute('content', 'initial-scale=1.0001, minimum-scale=1.0001, maximum-scale=1.0001, user-scalable=no');
+		}
+	</script>
+
+</head>
+<body>
+<a name="#top"></a>
+<div id="ng-app" ng-app="open-vitae" ui-view>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 text-center">
+				<div class="pageup-loader"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% if(release){
+scripts.forEach( function ( file ) { %>
+<script type="text/javascript" async src="<%= file %>?t=<%= timestamp %>"></script>
+<% });
+} else {
+scripts.forEach( function ( file ) { %>
+<script type="text/javascript" src="<%= file %>?t=<%= timestamp %>"></script>
+<% });
+} %>
+</body>
+</html>
