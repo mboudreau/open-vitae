@@ -83,6 +83,7 @@ module.exports = {
 			'vendor/angular-restate/src/angular-restate.js'
 		],
 		css: [
+			'node_modules/angular-material/angular-material.css'
 		],
 		assets: [
 			{

@@ -147,6 +147,28 @@ module.exports = function (grunt) {
 			},
 
 			concat: {
+				css:{
+					files: [
+						{
+							src: [
+								'<%= vendor_files.css %>',
+								'<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
+							],
+							dest: '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
+						}
+					]
+				},
+				'css-release':{
+					files: [
+						{
+							src: [
+								'<%= vendor_files.css %>',
+								'<%= release_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
+							],
+							dest: '<%= release_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
+						}
+					]
+				},
 				release: {
 					src: [
 						'<%= vendor_files.js %>',
@@ -222,8 +244,7 @@ module.exports = function (grunt) {
 					files: [
 						{
 							src: [
-								'<%= app_files.less %>',
-								'<%= vendor_files.css %>'
+								'<%= app_files.less %>'
 							],
 							dest: '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
 						}
@@ -240,8 +261,7 @@ module.exports = function (grunt) {
 					files: [
 						{
 							src: [
-								'<%= app_files.less %>',
-								'<%= vendor_files.css %>'
+								'<%= app_files.less %>'
 							],
 							dest: '<%= release_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
 						}
@@ -362,6 +382,7 @@ module.exports = function (grunt) {
 								'**/*.js',
 								'**/*.css',
 								'!vendor/**/*',
+								'!node_modules/**/*',
 								'!karma-unit.js'
 							],
 							cwd: '<%= build_dir %>/',
@@ -494,7 +515,7 @@ module.exports = function (grunt) {
 
 				less: {
 					files: ['src/**/*.less', 'vendor/**/*.less'],
-					tasks: ['less:build']
+					tasks: ['less:build', 'concat:css']
 				},
 
 				jsunit: {
@@ -528,14 +549,14 @@ module.exports = function (grunt) {
 					files: [
 						'<%= app_files.js %>'
 					],
-					tasks: ['jscs:src', 'copy:build_app_js', 'ngAnnotate', 'concat', 'uglify', 'karma:unit:run']
+					tasks: ['jscs:src', 'copy:build_app_js', 'ngAnnotate', 'concat:release', 'uglify', 'karma:unit:run']
 				},
 
 				jsvendor: {
 					files: [
 						'<%= vendor_files.js %>'
 					],
-					tasks: ['copy:build_vendor_js', 'ngAnnotate', 'concat', 'uglify']
+					tasks: ['copy:build_vendor_js', 'ngAnnotate', 'concat:release', 'uglify']
 				},
 
 				assets: {
@@ -559,8 +580,8 @@ module.exports = function (grunt) {
 				},
 
 				less: {
-					files: ['src/**/*.less', 'vendor/**/*.less'],
-					tasks: ['less:release', 'imageEmbed', 'compress']
+					files: ['src/**/*.less'],
+					tasks: ['less:release', 'concat:css', 'imageEmbed', 'compress']
 				},
 
 				jsunit: {
@@ -698,7 +719,7 @@ module.exports = function (grunt) {
 	/**
 	 * The build task gets your app ready to run for development and testing.
 	 */
-	var buildTasks = ['file_check:vendors', 'clean', 'mkdir:tmp', 'html2js', 'jscs', 'less:build',
+	var buildTasks = ['file_check:vendors', 'clean', 'mkdir:tmp', 'html2js', 'jscs', 'less:build', 'concat:css',
 		'copy:build_app_assets', 'copy:build_vendor_assets',
 		'copy:build_app_js', 'copy:build_vendor_js', 'ngAnnotate', 'index:build'];
 	grunt.registerTask('build', buildTasks.concat([
@@ -709,7 +730,7 @@ module.exports = function (grunt) {
 	 * The release task gets your app ready for deployment
 	 */
 	grunt.registerTask('release', buildTasks.concat([
-		'copy:release_assets', 'less:release', 'imageEmbed', 'concat', 'uglify', 'compress:release', 'index:release', 'htmlmin:release', 'test'
+		'copy:release_assets', 'less:release', 'concat:css-release', 'imageEmbed', 'concat:release', 'uglify', 'compress:release', 'index:release', 'htmlmin:release', 'test'
 	]));
 
 	grunt.registerTask('package', [

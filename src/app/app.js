@@ -5,6 +5,8 @@ angular.module('open-vitae', [
 		'templates-app',
 		'templates-directives',
 
+		'ngMaterial',
+
 		// Services
 		'codinghitchhiker.restate'
 	])
@@ -34,37 +36,23 @@ angular.module('open-vitae', [
 
 		// API Authentication
 		/*$httpProvider.interceptors.push(function (api, auth, $cookies) {
-			return {
-				request: function (config) {
-					if (api.url && auth.token && config.url.indexOf(api.url) === 0) {
-						config.headers.Authorization = 'Bearer ' + auth.token;
-					}
-					return config;
-				}
-			};
-		});
-*/
+		 return {
+		 request: function (config) {
+		 if (api.url && auth.token && config.url.indexOf(api.url) === 0) {
+		 config.headers.Authorization = 'Bearer ' + auth.token;
+		 }
+		 return config;
+		 }
+		 };
+		 });
+		 */
 		$stateProvider
 			.state('app', {
-				abstract: true,
-				controller: function ($scope) {
-					$scope.showFeatureToggle = window.showFeatureToggle || false;
-
-					$scope.features = {
-						'card-layout': {
-							enabled: true,
-							version: '1'
-						},
-						'result-layout': {
-							enabled: true,
-							version: '1'
-						}
-					};
-				},
+				url: '/',
 				templateUrl: 'app.tpl.html'
 			})
-			.state('app.intro', {
-				url: '/',
+			.state('user', {
+				url: '/?redirect',
 				template: '<div intro></div>'
 			});
 	});
