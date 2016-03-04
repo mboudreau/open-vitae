@@ -1,0 +1,12 @@
+<div layout="row" layout-align="center center">
+	<form name="colorForm">
+		<md-virtual-repeat-container>
+			<div md-virtual-repeat="item in data">
+				<md-input-container>
+					<label>{{item}}</label>
+					<input name="email" ng-model="email" type="email" required>
+				</md-input-container>
+			</div>
+		</md-virtual-repeat-container>
+	</form>
+</div>

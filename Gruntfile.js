@@ -586,6 +586,7 @@ module.exports = function (grunt) {
 					protocol: 'http', // TODO: need to be able to test https over phantom
 					middleware: function (connect, options) {
 						var middlewares = [];
+						middlewares.push(modRewrite(['^[^\\.]*$ /index.html [L]']));
 						//middlewares.push(modRewrite(['!\\.?(js|css|html|eot|svg|ttf|woff|otf|css|png|jpg|gif|ico|pdf) / [L]'])); // Anything after name
 						middlewares.push(function (req, res, next) {
 							var url = req.url.split('?')[0];
