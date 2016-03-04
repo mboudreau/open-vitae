@@ -106,34 +106,12 @@ module.exports = function (grunt) {
 						}
 					]
 				},
-				libs: {
-					files: [
-						{
-							src: ['**/*'],
-							dest: '<%= release_dir %>/libs/',
-							cwd: '<%= release_dir %>/assets/',
-							expand: true,
-							rename: function (dest, src) {
-								return dest + src.replace('-' + taskConfig.pkg.version, '');
-							}
-						},
-						{
-							src: ['**/*'],
-							dest: '<%= release_dir %>/libs/<%= pkg.version %>/',
-							cwd: '<%= release_dir %>/assets/',
-							expand: true,
-							rename: function (dest, src) {
-								return dest + src.replace('-' + taskConfig.pkg.version, '');
-							}
-						}
-					]
-				},
 				package: {
 					files: [
 						{
 							src: ['**/*'],
 							dest: '<%= package_dir %>/',
-							cwd: '<%= release_dir %>/libs/<%= pkg.version %>/',
+							cwd: '<%= release_dir %>/',
 							expand: true
 						},
 						{
@@ -232,7 +210,7 @@ module.exports = function (grunt) {
 						{
 							src: ['**/*.html'],
 							cwd: '<%= release_dir %>/',
-							dest: '<%= release_dir %>/<%= pkg.name %>',
+							dest: '<%= release_dir %>/',
 							expand: true
 						}
 					]
@@ -696,7 +674,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('watch', ['build', 'notify_hooks', 'connect:build', 'karma:continuous', 'pact:start', 'execute:pact-setup', 'delta']);
 	grunt.registerTask('watch:local', ['build', 'notify_hooks', 'connect:build', 'karma:continuous', 'delta']);
-	grunt.registerTask('watch:release', ['release', 'copy:libs', 'notify_hooks', 'connect:release', 'karma:continuous', 'pact:start', 'execute:pact-setup', 'deltarelease']);
+	grunt.registerTask('watch:release', ['release', 'notify_hooks', 'connect:release', 'karma:continuous', 'pact:start', 'execute:pact-setup', 'deltarelease']);
 
 	/**
 	 * The default task is to build and release.
@@ -734,7 +712,7 @@ module.exports = function (grunt) {
 	]));
 
 	grunt.registerTask('package', [
-		'copy:libs', 'cloudfront', 'copy:package'
+		'cloudfront', 'copy:package'
 	]);
 
 	function filterForJS(files) {
