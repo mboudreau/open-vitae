@@ -712,7 +712,7 @@ module.exports = function (grunt) {
 	]));
 
 	grunt.registerTask('package', [
-		'cloudfront', 'copy:package'
+		/*'cloudfront',*/ 'copy:package'
 	]);
 
 	function filterForJS(files) {
