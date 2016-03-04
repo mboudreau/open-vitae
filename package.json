@@ -5,14 +5,25 @@
     "node": ">=4.0"
   },
   "dependencies": {
+    "angular": "^1.5.0",
+    "angular-animate": "^1.5.0",
+    "angular-aria": "^1.5.0",
     "angular-feature-toggle": "^0.1.6",
+    "angular-material": "^1.0.6",
+    "angular-messages": "^1.5.0",
+    "angular-motion": "^0.4.3",
     "angular-numeraljs": "^1.3.0",
+    "angular-sanitize": "^1.5.0",
+    "angular-ui-router": "^0.2.18",
     "angularytics": "^0.4.0",
     "font-awesome": "^4.5.0",
+    "lesshat": "^3.0.2",
     "ng-surprise": "^0.2.0",
-    "numeraljs": "^1.5.6"
+    "numeraljs": "^1.5.6",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "angular-mocks": "^1.5.0",
     "chromedriver": "^2.19.0",
     "connect-modrewrite": "^0.8.1",
     "glob": "^6.0.4",

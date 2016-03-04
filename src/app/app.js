@@ -4,8 +4,6 @@ angular.module('open-vitae', [
 		// Templates
 		'templates-app',
 		'templates-directives',
-		// directives
-		'ui.bootstrap.modal',
 
 		// Services
 		'codinghitchhiker.restate'

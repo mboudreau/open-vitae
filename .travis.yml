@@ -2,8 +2,7 @@ language: node_js
 node_js:
 - stable
 before_install:
-- npm install -g grunt-cli bower karma phantomjs-prebuilt karma-phantomjs-launcher
-  protractor
+- npm install -g grunt-cli bower karma phantomjs-prebuilt karma-phantomjs-launcher protractor
 - bower install
 cache:
   directories:

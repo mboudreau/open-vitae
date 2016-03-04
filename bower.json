@@ -2,27 +2,7 @@
   "name": "open-vitae",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "~1.4.8",
-    "bootstrap": "~3.3.5",
-    "angular-ui-router": "~0.2.15",
-    "angular-strap": "~2.3.1",
-    "angular-motion": "~0.4.2",
-    "angular-animate": "~1.4.8",
-    "angular-touch": "~1.4.8",
-    "angular-sanitize": "~1.4.8",
-    "bootstrap-additions": "~0.3.1",
-    "angular-cookies": "~1.4.8",
-    "lesshat": "~3.0.2",
-    "angular-bootstrap": "https://github.com/angular-ui/bootstrap.git#1.1.0",
-    "angular-local-storage": "~0.2.2",
-    "underscore": "~1.8.3",
-    "angular-restate": "https://github.com/mboudreau/angular-restate.git",
-    "bootsketch": "~1.0.1",
-    "angucomplete-alt": "~1.1.0",
-    "angular-ui-scrollpoint": "~1.0.1",
-    "elasticsearch": "~6.1.0",
-    "angular-mosaic": "~1.0.0",
-    "ngInfiniteScroll": "^1.2.2"
+    "angular-restate": "https://github.com/mboudreau/angular-restate.git"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.8"

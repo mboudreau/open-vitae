@@ -47,7 +47,7 @@ module.exports = {
 	 */
 	test_files: {
 		js: [
-			'vendor/angular-mocks/angular-mocks.js',
+			'node_modules/angular-mocks/angular-mocks.js',
 			'mock/fixtures/**/*.js',
 			'!mock/fixtures/**/*.spec.js'
 		]
@@ -73,33 +73,16 @@ module.exports = {
 	 */
 	vendor_files: {
 		js: [
-			'vendor/angular/angular.js',
-			'vendor/angular-sanitize/angular-sanitize.js',
-			'vendor/angular-cookies/angular-cookies.js',
-			'vendor/angular-animate/angular-animate.js',
-			'vendor/angular-ui-router/release/angular-ui-router.js',
-			'vendor/angular-restate/src/angular-restate.js',
-			'vendor/angucomplete-alt/angucomplete-alt.js',
-			'vendor/angular-bootstrap/src/tabs/tabs.js',
-			'vendor/angular-bootstrap/src/buttons/buttons.js',
-			'vendor/angular-bootstrap/src/modal/modal.js',
-			'vendor/angular-bootstrap/src/position/position.js',
-			'vendor/angular-bootstrap/src/stackedMap/stackedMap.js',
-			'vendor/angular-bootstrap/src/dropdown/dropdown.js',
-			'vendor/angular-bootstrap/src/tooltip/tooltip.js',
-			'vendor/angular-bootstrap/src/popover/popover.js',
-			'vendor/angular-ui-scrollpoint/dist/scrollpoint.js',
-			'vendor/elasticsearch/elasticsearch.angular.js',
-			'node_modules/angular-feature-toggle/dist/angular-feature-toggle.js',
-			'node_modules/angularytics/dist/angularytics.js',
-			'vendor/angular-mosaic/angular-mosaic.js',
-			'vendor/ngInfiniteScroll/build/ng-infinite-scroll.js',
-			'node_modules/numeraljs/numeral.js',
-			'node_modules/angular-numeraljs/dist/angular-numeraljs.js'
+			'node_modules/angular/angular.js',
+			'node_modules/angular-animate/angular-animate.js',
+			'node_modules/angular-sanitize/angular-sanitize.js',
+			'node_modules/angular-aria/angular-aria.js',
+			'node_modules/angular-messages/angular-messages.js',
+			'node_modules/angular-material/angular-material.js',
+			'node_modules/angular-ui-router/release/angular-ui-router.js',
+			'vendor/angular-restate/src/angular-restate.js'
 		],
 		css: [
-			'vendor/angucomplete-alt/angucomplete-alt.css',
-			'vendor/angular-mosaic/angular-mosaic.css'
 		],
 		assets: [
 			{
@@ -110,20 +93,6 @@ module.exports = {
 			}
 		],
 		tpl: {
-			bootstrap: {
-				options: {
-					base: 'vendor/angular-bootstrap/',
-					rename:function (moduleName) {
-						return 'uib/' + moduleName;
-					}
-				},
-				src: [
-					'vendor/angular-bootstrap/template/tabs/*.html',
-					'vendor/angular-bootstrap/template/popover/*.html',
-					'vendor/angular-bootstrap/template/tooltip/*.html',
-					'vendor/angular-bootstrap/template/modal/*.html'
-				]
-			}
 		}
 	}
 };

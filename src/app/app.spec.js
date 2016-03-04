@@ -1,5 +1,5 @@
 describe('App', function () {
-	beforeEach(module('pageup.scout-app'));
+	beforeEach(module('open-vitae'));
 	afterEach(function () {
 
 	});
