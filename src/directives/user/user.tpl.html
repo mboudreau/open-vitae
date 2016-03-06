@@ -1,12 +1,22 @@
-<div layout="row" layout-align="center center">
-	<form name="colorForm">
-		<md-virtual-repeat-container>
-			<div md-virtual-repeat="item in data">
+<div layout="column" layout-fill>
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<span>My App's Title</span>
+			<!-- fill up the space between left and right area -->
+			<span flex></span>
+			<md-button>
+				Right Bar Button
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-content layout="column" layout-fill="">
+		<md-virtual-repeat-container layout="column" flex="grow">
+			<div md-virtual-repeat="item in data" flex="grow">
 				<md-input-container>
 					<label>{{item}}</label>
 					<input name="email" ng-model="email" type="email" required>
 				</md-input-container>
 			</div>
 		</md-virtual-repeat-container>
-	</form>
+	</md-content>
 </div>

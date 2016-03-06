@@ -4,7 +4,8 @@
 @import '../../node_modules/font-awesome/less/font-awesome';
 
 // Directives Specific Stylesheets
-//@import "../directives/scout/scout";
+@import "../directives/user/user";
+@import "../directives/intro/intro";
 
 // Custom utility files
 @import 'mixins';
@@ -12,8 +13,13 @@
 @import 'utilities';
 @import 'variables';
 
+@background-color: #f3f3f3;
+
 body {
-	background-color: #f0f0f0
+	background-color: @background-color;
+	overflow: hidden;
 }
 
-
+#ng-app {
+	height:100%;
+}

@@ -1,0 +1,39 @@
+<div layout="row" layout-fill>
+	<div layout="column" flex role="main">
+		<md-content layout="vertical" flex layout-align="center center">
+			<div layout="column" layout-fill>
+				<div layout="row" layout-align="center center" layout-fill>
+					<img src="assets/openvitae.svg" flex="30" layout-padding>
+				</div>
+				<div layout="row" layout-align="center center" layout-fill>
+					<md-whiteframe class="md-whiteframe-z1" layout="column" flex="30" layout-padding>
+						<md-content md-theme="docs-dark">
+							<md-tabs md-selected="selectedIndex" md-dynamic-height="true" md-swipe-content="false" md-no-pagination="true">
+								<md-tab label="email">
+									<md-input-container flex="grow" layout-fill>
+										<label>Email</label>
+										<input ng-model="email" flex="grow" type="email" ng-disabled="loading">
+									</md-input-container>
+								</md-tab>
+								<md-tab label="pass">
+									<md-input-container  flex="grow" layout-fill>
+										<label>Password</label>
+										<input ng-model="password" type="password" flex="grow" ng-disabled="loading">
+									</md-input-container>
+								</md-tab>
+								<md-tab label="form">
+
+								</md-tab>
+							</md-tabs>
+							<div layout="row" layout-sm="column" layout-align="end center" ng-hide="selectedIndex == 2">
+								<md-button class="md-raised md-primary" flex="30" flex-sm="100" ng-click="onNext()" ng-disabled="loading">
+									Next <span class="fa fa-lg fa-angle-right"></span>
+								</md-button>
+							</div>
+						</md-content>
+					</md-whiteframe>
+				</div>
+			</div>
+		</md-content>
+	</div>
+</div>

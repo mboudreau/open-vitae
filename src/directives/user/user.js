@@ -16,7 +16,26 @@ angular.module('open-vitae.user', [
 			templateUrl: 'user/user.tpl.html',
 			scope: {},
 			link: function ($scope, $element, $attrs) {
-				$scope.data = ['item 1', 'item 2'];
+				$scope.data = [
+					'item 1',
+					'item 2',
+					'item 1',
+					'item 2',
+					'item 1',
+					'item 2',
+					'item 1',
+					'item 2',
+					'item 1',
+					'item 2',
+					'item 1',
+					'item 2',
+					'item 1',
+					'item 2',
+					'item 1',
+					'item 2',
+					'item 1',
+					'item 2'
+				];
 			}
 		}
 	});

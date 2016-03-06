@@ -6,6 +6,7 @@ angular.module('open-vitae', [
 		'templates-directives',
 
 		'ngMaterial',
+		'open-vitae.intro',
 		'open-vitae.user',
 
 		// Services
@@ -18,11 +19,11 @@ angular.module('open-vitae', [
 		$stateProvider
 			.state('app', {
 				url: '/',
-				templateUrl: 'app.tpl.html'
+				template: '<div intro layout="column" layout-fill></div>'
 			})
 			.state('user', {
 				url: '/user?redirect',
-				template: '<div user></div>'
+				template: '<div user layout="column" layout-fill></div>'
 			});
 
 	});
