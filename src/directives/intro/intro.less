@@ -4,15 +4,36 @@
 	}
 
 	md-whiteframe {
-		background-color:#fff;
+		background-color: #fff;
 
 		md-tabs {
 			md-tab-content {
 				padding: 20px 0;
 			}
 			md-tabs-wrapper {
-				display:none;
+				display: none;
 			}
 		}
+	}
+
+	&.form {
+		md-whiteframe, md-content, md-tab-content {
+			padding: 0;
+		}
+	}
+
+	h2 {
+		font-weight:normal;
+		margin-bottom:50px;
+	}
+
+	.loader {
+		position:absolute;
+		top:0;
+		left:0;
+		right:0;
+		bottom:0;
+		z-index:10;
+		background: rgba(255, 255, 255, 0.25);
 	}
 }

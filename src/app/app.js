@@ -18,11 +18,11 @@ angular.module('open-vitae', [
 
 		$stateProvider
 			.state('app', {
-				url: '/',
+				url: '/?redirect&company',
 				template: '<div intro layout="column" layout-fill></div>'
 			})
 			.state('user', {
-				url: '/user?redirect',
+				url: '/user',
 				template: '<div user layout="column" layout-fill></div>'
 			});
 

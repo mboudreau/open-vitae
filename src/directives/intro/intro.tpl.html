@@ -1,32 +1,61 @@
 <div layout="row" layout-fill>
-	<div layout="column" flex role="main">
+	<div layout="column" flex role="main" ng-class="{'form': selectedIndex == 2}">
 		<md-content layout="vertical" flex layout-align="center center">
 			<div layout="column" layout-fill>
-				<div layout="row" layout-align="center center" layout-fill>
-					<img src="assets/openvitae.svg" flex="30" layout-padding>
+				<div layout="row" layout-fill
+				     ng-class="{'layout-align-start-center': selectedIndex == 2, 'layout-align-center-center': selectedIndex != 2}">
+					<img src="assets/openvitae.svg"
+					     ng-class="{'flex-15 flex-offset-5': selectedIndex == 2, 'flex-30':selectedIndex != 2}"
+					     layout-padding>
 				</div>
 				<div layout="row" layout-align="center center" layout-fill>
-					<md-whiteframe class="md-whiteframe-z1" layout="column" flex="30" layout-padding>
-						<md-content md-theme="docs-dark">
-							<md-tabs md-selected="selectedIndex" md-dynamic-height="true" md-swipe-content="false" md-no-pagination="true">
+					<md-whiteframe class="md-whiteframe-z1" layout="column"
+					               ng-class="{'flex-90': selectedIndex == 2, 'flex-30':selectedIndex != 2}"
+					               layout-padding>
+						<md-content>
+							<div layout="column" layout-align="center center" layout-fill flex="grow" class="loader"
+							     ng-show="loading">
+								<md-progress-circular md-diameter="100"></md-progress-circular>
+							</div>
+							<md-tabs md-selected="selectedIndex" md-dynamic-height="true" md-swipe-content="false"
+							         md-no-pagination="true">
 								<md-tab label="email">
-									<md-input-container flex="grow" layout-fill>
-										<label>Email</label>
-										<input ng-model="email" flex="grow" type="email" ng-disabled="loading">
-									</md-input-container>
+									<form flex="grow" layout-fill ng-submit="onNext()">
+										<md-input-container flex="grow" layout-fill>
+											<label>Email</label>
+											<input ng-model="email" flex="grow" type="email" ng-disabled="loading">
+										</md-input-container>
+									</form>
 								</md-tab>
 								<md-tab label="pass">
-									<md-input-container  flex="grow" layout-fill>
-										<label>Password</label>
-										<input ng-model="password" type="password" flex="grow" ng-disabled="loading">
-									</md-input-container>
+									<form flex="grow" layout-fill ng-submit="onNext()">
+										<md-input-container flex="grow" layout-fill>
+											<label>Password</label>
+											<input ng-model="password" type="password" flex="grow"
+											       ng-disabled="loading">
+										</md-input-container>
+									</form>
 								</md-tab>
 								<md-tab label="form">
-
+									<!-- Change the width and height values to suit you best -->
+									<div class="typeform-widget" data-url="{{formUrl}}"
+									     data-text="All fields" style="width:100%;height:750px;"></div>
+								</md-tab>
+								<md-tab label="allow">
+									<h2 flex="grow" layout-fill style="text-align:center">Are you sure you want to allow <strong>{{company}}</strong> to access your resume data?</h2>
+									<div layout="row" layout-sm="column"  layout-align="space-between center">
+										<md-button class="md-raised md-warn" flex="30" flex-sm="100" ng-click="deny()" ng-disabled="loading">
+											<span class="fa fa-lg fa-times-circle"></span> No
+										</md-button>
+										<md-button class="md-raised md-primary" flex="30" flex-sm="100" ng-click="accept()" ng-disabled="loading">
+											Yes <span class="fa fa-lg fa-check-circle"></span>
+										</md-button>
+									</div>
 								</md-tab>
 							</md-tabs>
-							<div layout="row" layout-sm="column" layout-align="end center" ng-hide="selectedIndex == 2">
-								<md-button class="md-raised md-primary" flex="30" flex-sm="100" ng-click="onNext()" ng-disabled="loading">
+							<div layout="row" layout-sm="column" layout-align="end center" ng-hide="selectedIndex >= 2">
+								<md-button class="md-raised md-primary" flex="30" flex-sm="100" ng-click="onNext()"
+								           ng-disabled="loading">
 									Next <span class="fa fa-lg fa-angle-right"></span>
 								</md-button>
 							</div>

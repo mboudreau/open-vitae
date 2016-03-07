@@ -10,7 +10,7 @@ angular.module('open-vitae.intro', [
 		// Services
 		'codinghitchhiker.restate'
 	])
-	.directive('intro', function (Restate) {
+	.directive('intro', function (Restate, $window, $stateParams) {
 		return {
 			restrict: 'A',
 			templateUrl: 'intro/intro.tpl.html',
@@ -18,6 +18,7 @@ angular.module('open-vitae.intro', [
 			link: function ($scope, $element, $attrs) {
 				$scope.selectedIndex = 0;
 				$scope.loading = false;
+				$scope.company = $stateParams.company;
 				$scope.onNext = function () {
 					$scope.loading = true;
 					switch ($scope.selectedIndex) {
@@ -29,10 +30,19 @@ angular.module('open-vitae.intro', [
 									$scope.loading = false;
 								} else {
 									schema.webhook_submit_url += '/' + $scope.email;
-									Restate.baseUrl('http://api.openvitae.org').create('getForm', 'form').$get().then(function(data){
-
+									Restate.baseUrl('https://api.typeform.io').create('createForm', 'v0.4/forms').$post({}, schema, {headers: {'X-API-TOKEN': '5b14b817f81c504834d2e235163a5697'}}).then(function (data) {
+										$scope.formUrl = "https://forms.typeform.io/to/" + data.urls[0].id;
 										$scope.selectedIndex = 2;
 										$scope.loading = false;
+
+										var script = document.getElementById('typef_orm');
+										if (script) {
+											document.removeChild(script);
+										}
+										script = document.createElement("script");
+										script.src = 'https://s3-eu-west-1.amazonaws.com/share.typeform.com/widget.js';
+										script.id = 'typef_orm';
+										document.body.appendChild(script);
 									});
 								}
 							});
@@ -40,10 +50,29 @@ angular.module('open-vitae.intro', [
 						case 1:
 							$scope.selectedIndex = 3;
 							$scope.loading = false;
-							break
+							break;
+						case 2:
+							$scope.selectedIndex = 3;
+							$scope.loading = false;
+							break;
+
 					}
 				};
 
+				$scope.deny = function () {
+					alert('access denied.');
+				};
+
+				$scope.accept = function () {
+					window.location.href = $stateParams.redirect + '&token=' + $scope.email;
+				};
+
+				angular.element($window).bind('message', function (ev) {
+					if (ev.data === "form-submit") {
+						$scope.onNext();
+						$scope.$apply();
+					}
+				});
 
 				var schema = {
 					"webhook_submit_url": "http://api.openvitae.org/user",
@@ -351,8 +380,6 @@ angular.module('open-vitae.intro', [
 						}
 					]
 				};
-
-
 			}
 		}
 	});
