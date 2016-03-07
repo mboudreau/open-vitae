@@ -1,6 +1,6 @@
 {
   "name": "open-vitae",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "engine": {
     "node": ">=4.0"
   },
